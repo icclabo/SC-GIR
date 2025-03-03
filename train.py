@@ -23,6 +23,13 @@ from torchvision.models.resnet import resnet34, resnet18
 from transformation import BarlowTwinsTransform, cifar10_normalization, mnist_normalization
 from model import BarlowTwins
 from loss import BarlowTwinsLoss
+import wandb
+from pytorch_lightning.loggers import WandbLogger
+
+
+wandb.init(project="TMC_SemCom", name="barlow_twins_training")
+# WandB Logger for PyTorch Lightning
+wandb_logger = WandbLogger(project="TMC_SemCom", name="barlow_twins_training")
 
 
 parser = argparse.ArgumentParser(description='Contrastive Sem Com Training')
@@ -130,14 +137,14 @@ def main():
     save_last=True,  # Also save the last model
     verbose=True
 )
-
+    
     trainer = Trainer(
     max_epochs=args.epochs,
     accelerator="auto",
     devices=[1,2,3,4,5] if torch.cuda.is_available() else None,  # limiting got iPython runs
     callbacks=[#online_finetuner,
         checkpoint_callback],
-    #logger=logger
+    logger=wandb_logger,
 )
     print('===================Training model====================')
 
