@@ -160,6 +160,9 @@ def main():
 
     save_str = f'{args.dataset}_{args.encoder}_outDim-{args.output_dim}_Epo{args.epochs}_barlowtwins.pth'
     torch.save(model.state_dict(), save_str)
+
+
+    
     print(f'Model saved as {save_str}')
 
 
