@@ -59,6 +59,8 @@ parser.add_argument('--SNR', default=10, type=int,
                     metavar='SNR', help='Signal to Noise Ratio')
 parser.add_argument('--down_epochs', default=100, type=int,
                     metavar='down_epochs', help='Downstream Task Epochs')
+parser.add_argument('--downstream_train', default=False, type=bool,
+                    metavar='downstream_train', help='Downstream Task Training or Simulation') 
 
 def main():
     args = parser.parse_args()
@@ -219,36 +221,72 @@ def main():
         best_val_acc = 0.0
         best_state_dict = None
 
-        for epoch in range(args.down_epochs):
-            downstream_task.train()
-            running_loss = 0.0
-            running_corrects = 0
-            print(f'Epoch {epoch}/{args.down_epochs}')
-            print('-' * 10)
-            for batch in train_loader:
-                (_, _, image), label = batch
-                image = image.to('cuda')
-                label = label.to('cuda')
+        if args.downstream_train == True:
+            print('==================Training Downstream Task==================')
+            for epoch in range(args.down_epochs):
+                downstream_task.train()
+                running_loss = 0.0
+                running_corrects = 0
+                print(f'Epoch {epoch}/{args.down_epochs}')
+                print('-' * 10)
+                for batch in train_loader:
+                    (_, _, image), label = batch
+                    image = image.to('cuda')
+                    label = label.to('cuda')
 
-                encoder_output = model.forward(image)
-                output = downstream_task(encoder_output)
-                loss = criterion(output, label)
-                downstream_task_optimizer.zero_grad()
-                loss.backward()
-                downstream_task_optimizer.step()
+                    encoder_output = model.forward(image)
+                    output = downstream_task(encoder_output)
+                    loss = criterion(output, label)
+                    downstream_task_optimizer.zero_grad()
+                    loss.backward()
+                    downstream_task_optimizer.step()
 
-                running_loss += loss.item() * image.size(0)
-                _, preds = torch.max(output, 1)
-                running_corrects += torch.sum(preds == label.data)
+                    running_loss += loss.item() * image.size(0)
+                    _, preds = torch.max(output, 1)
+                    running_corrects += torch.sum(preds == label.data)
 
-            scheduler.step()
-            epoch_loss = running_loss / len(train_loader.dataset)
-            epoch_acc = running_corrects.double() / len(train_loader.dataset)
-            print(f'Train Loss: {epoch_loss:.4f} Train Acc: {epoch_acc:.4f}')
+                scheduler.step()
+                epoch_loss = running_loss / len(train_loader.dataset)
+                epoch_acc = running_corrects.double() / len(train_loader.dataset)
+                print(f'Train Loss: {epoch_loss:.4f} Train Acc: {epoch_acc:.4f}')
 
+                downstream_task.eval()
+                val_running_corrects = 0
+
+                with torch.no_grad():
+                    for batch in val_loader:
+                        (_, _, image), label = batch
+                        image = image.to('cuda')
+                        label = label.to('cuda')
+
+                        encoder_output = model.forward(image)
+                        output = downstream_task(encoder_output)
+
+                        _, preds = torch.max(output, 1)
+                        val_running_corrects += torch.sum(preds == label.data)
+
+                val_acc = val_running_corrects.double() / len(val_loader.dataset)
+                print(f'Val Acc: {val_acc:.4f}')
+
+                if val_acc > best_val_acc:
+                    best_val_acc = val_acc
+                    print('==================Updating Best State Dict==================')
+                    best_state_dict = downstream_task.state_dict()
+
+            # Save the best model after all epochs
+            if best_state_dict is not None:
+                print('==================Saving Model==================')
+                save_str = f'{args.dataset}_{args.encoder}_outDim-{args.output_dim}_Epo{args.epochs}_downstreamTask.pth'
+                torch.save(best_state_dict, save_str)
+                print(f'Model saved as {save_str} with Best Val Acc: {best_val_acc:.4f}')
+            else:
+                print('No model saved (validation accuracy never improved).')
+        else:
+            print('==================Simulating Downstream Task==================') 
+
+            downstream_task.load_state_dict(torch.load('cifar10_resnet50_outDim-2048_Epo500_downstreamTask.pth'))
             downstream_task.eval()
             val_running_corrects = 0
-
             with torch.no_grad():
                 for batch in val_loader:
                     (_, _, image), label = batch
@@ -264,19 +302,8 @@ def main():
             val_acc = val_running_corrects.double() / len(val_loader.dataset)
             print(f'Val Acc: {val_acc:.4f}')
 
-            if val_acc > best_val_acc:
-                best_val_acc = val_acc
-                print('==================Updating Best State Dict==================')
-                best_state_dict = downstream_task.state_dict()
 
-        # Save the best model after all epochs
-        if best_state_dict is not None:
-            print('==================Saving Model==================')
-            save_str = f'{args.dataset}_{args.encoder}_outDim-{args.output_dim}_Epo{args.epochs}_downstreamTask.pth'
-            torch.save(best_state_dict, save_str)
-            print(f'Model saved as {save_str} with Best Val Acc: {best_val_acc:.4f}')
-        else:
-            print('No model saved (validation accuracy never improved).')
+        
 
 
 
