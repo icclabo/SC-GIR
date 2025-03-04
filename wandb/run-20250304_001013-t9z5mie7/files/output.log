@@ -1,0 +1,48 @@
+Namespace(workers=8, epochs=500, batch_size=128, lr=0.0003, lambd=0.0055, output_dim=2048, dataset='cifar10', encoder='resnet50', num_workers=8)
+Files already downloaded and verified
+Files already downloaded and verified
+/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+===================Training model====================
+Initializing distributed: GLOBAL_RANK: 2, MEMBER: 3/6
+LOCAL_RANK: 2 - CUDA_VISIBLE_DEVICES: [0,1,2,3,4,5]
+Traceback (most recent call last):
+  File "/home/ubuntu/wanasekara.sh/TMC_SemCom/train.py", line 183, in <module>
+    main()
+  File "/home/ubuntu/wanasekara.sh/TMC_SemCom/train.py", line 164, in main
+    trainer.fit(model, train_loader,val_loader)#val_loader)
+  File "/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 544, in fit
+    call._call_and_handle_interrupt(
+  File "/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/trainer/call.py", line 43, in _call_and_handle_interrupt
+    return trainer.strategy.launcher.launch(trainer_fn, *args, trainer=trainer, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/strategies/launchers/subprocess_script.py", line 102, in launch
+    return function(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 580, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+  File "/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 989, in _run
+    results = self._run_stage()
+  File "/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 1035, in _run_stage
+    self.fit_loop.run()
+  File "/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/loops/fit_loop.py", line 203, in run
+    self.on_advance_end()
+  File "/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/loops/fit_loop.py", line 374, in on_advance_end
+    call._call_callback_hooks(trainer, "on_train_epoch_end", monitoring_callbacks=True)
+  File "/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/trainer/call.py", line 208, in _call_callback_hooks
+    fn(trainer, trainer.lightning_module, *args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/callbacks/model_checkpoint.py", line 313, in on_train_epoch_end
+    self._save_topk_checkpoint(trainer, monitor_candidates)
+  File "/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/callbacks/model_checkpoint.py", line 370, in _save_topk_checkpoint
+    self._save_monitor_checkpoint(trainer, monitor_candidates)
+  File "/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/callbacks/model_checkpoint.py", line 690, in _save_monitor_checkpoint
+    self._update_best_and_save(current, trainer, monitor_candidates)
+  File "/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/callbacks/model_checkpoint.py", line 719, in _update_best_and_save
+    filepath = self._get_metric_interpolated_filepath_name(monitor_candidates, trainer, del_filepath)
+  File "/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/callbacks/model_checkpoint.py", line 644, in _get_metric_interpolated_filepath_name
+    filepath = self.format_checkpoint_name(monitor_candidates)
+  File "/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/callbacks/model_checkpoint.py", line 587, in format_checkpoint_name
+    filename = self._format_checkpoint_name(filename, metrics, auto_insert_metric_name=self.auto_insert_metric_name)
+  File "/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/callbacks/model_checkpoint.py", line 547, in _format_checkpoint_name
+    filename = filename.format(metrics)
+ValueError: Single '}' encountered in format string

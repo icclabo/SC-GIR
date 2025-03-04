@@ -1,0 +1,18 @@
+{"time":"2025-03-04T00:09:30.588382972Z","level":"INFO","msg":"using version","core version":"0.18.3"}
+{"time":"2025-03-04T00:09:30.58841065Z","level":"INFO","msg":"created symlink","path":"/home/ubuntu/wanasekara.sh/TMC_SemCom/wandb/run-20250304_000930-cb34ot04/logs/debug-core.log"}
+{"time":"2025-03-04T00:09:30.612546889Z","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2025-03-04T00:09:30.630142845Z","level":"INFO","msg":"created new stream","id":"cb34ot04"}
+{"time":"2025-03-04T00:09:30.63018913Z","level":"INFO","msg":"stream: started","id":"cb34ot04"}
+{"time":"2025-03-04T00:09:30.630240258Z","level":"INFO","msg":"handler: started","stream_id":{"value":"cb34ot04"}}
+{"time":"2025-03-04T00:09:30.630267718Z","level":"INFO","msg":"sender: started","stream_id":{"value":"cb34ot04"}}
+{"time":"2025-03-04T00:09:30.630298683Z","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"cb34ot04"}}
+{"time":"2025-03-04T00:09:31.151173798Z","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2025-03-04T00:09:31.152658334Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-04T00:09:33.049920361Z","level":"INFO","msg":"stream: closing","id":"cb34ot04"}
+{"time":"2025-03-04T00:09:33.04996977Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-04T00:09:33.052538292Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-04T00:09:36.869623002Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-04T00:09:37.446862273Z","level":"INFO","msg":"handler: closed","stream_id":{"value":"cb34ot04"}}
+{"time":"2025-03-04T00:09:37.44697233Z","level":"INFO","msg":"sender: closed","stream_id":{"value":"cb34ot04"}}
+{"time":"2025-03-04T00:09:37.446960528Z","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"cb34ot04"}}
+{"time":"2025-03-04T00:09:37.447129028Z","level":"INFO","msg":"stream: closed","id":"cb34ot04"}

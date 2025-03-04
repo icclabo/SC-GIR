@@ -3,3 +3,4 @@ checkpoints/
 lightning_logs/
 cifar-10-batches-py/
 *.pth
+wandb/

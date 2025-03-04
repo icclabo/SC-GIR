@@ -1,0 +1,540 @@
+Namespace(workers=8, epochs=500, batch_size=128, lr=0.0003, lambd=0.0055, output_dim=2048, dataset='cifar10', encoder='resnet50', num_workers=8)
+Files already downloaded and verified
+Files already downloaded and verified
+/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+===================Training model====================
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/6
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 6 processes
+----------------------------------------------------------------------------------------------------
+
+You are using a CUDA device ('NVIDIA RTX A5000') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/loggers/wandb.py:389: There is a wandb run already in progress and newly created instances of `WandbLogger` will reuse this run. If this is not desired, call `wandb.finish()` before instantiating `WandbLogger`.
+/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/callbacks/model_checkpoint.py:639: Checkpoint directory /home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints exists and is not empty.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2,3,4,5]
+
+  | Name            | Type            | Params
+----------------------------------------------------
+0 | encoder         | ResNet          | 11.2 M
+1 | projection_head | ProjectionHead  | 3.7 M
+2 | loss_fn         | BarlowTwinsLoss | 0
+----------------------------------------------------
+14.8 M    Trainable params
+0         Non-trainable params
+14.8 M    Total params
+59.388    Total estimated model params size (MB)
+Epoch 28: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 65/65 [00:08<00:00,  7.26it/s, v_num=wuuy, train_loss_step=720.0, val_loss=723.0, train_loss_epoch=685.0]
+/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/trainer/connectors/logger_connector/result.py:433: It is recommended to use `self.log('val_loss', ..., sync_dist=True)` when logging on epoch level in distributed setting to accumulate the metric across devices.
+                                                                                                                                                                                                                                                                                         
+/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/pytorch_lightning/trainer/connectors/logger_connector/result.py:433: It is recommended to use `self.log('train_loss', ..., sync_dist=True)` when logging on epoch level in distributed setting to accumulate the metric across devices.
+Epoch 0, global step 65: 'val_loss' reached 1845.47485 (best 1845.47485), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=0-loss-val_loss=1845.47-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 1, global step 130: 'val_loss' reached 1589.73999 (best 1589.73999), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=1-loss-val_loss=1589.74-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 2, global step 195: 'val_loss' reached 1443.31567 (best 1443.31567), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=2-loss-val_loss=1443.32-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 3, global step 260: 'val_loss' reached 1334.83069 (best 1334.83069), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=3-loss-val_loss=1334.83-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 4, global step 325: 'val_loss' reached 1274.45007 (best 1274.45007), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=4-loss-val_loss=1274.45-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 5, global step 390: 'val_loss' reached 1209.22217 (best 1209.22217), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=5-loss-val_loss=1209.22-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 6, global step 455: 'val_loss' reached 1138.01904 (best 1138.01904), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=6-loss-val_loss=1138.02-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 7, global step 520: 'val_loss' reached 1110.71350 (best 1110.71350), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=7-loss-val_loss=1110.71-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 8, global step 585: 'val_loss' reached 1035.22620 (best 1035.22620), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=8-loss-val_loss=1035.23-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 9, global step 650: 'val_loss' reached 1024.42773 (best 1024.42773), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=9-loss-val_loss=1024.43-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 10, global step 715: 'val_loss' reached 989.18958 (best 989.18958), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=10-loss-val_loss=989.19-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 11, global step 780: 'val_loss' reached 956.71686 (best 956.71686), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=11-loss-val_loss=956.72-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 12, global step 845: 'val_loss' reached 920.80920 (best 920.80920), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=12-loss-val_loss=920.81-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 13, global step 910: 'val_loss' reached 902.05133 (best 902.05133), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=13-loss-val_loss=902.05-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 14, global step 975: 'val_loss' reached 901.96277 (best 901.96277), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=14-loss-val_loss=901.96-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 15, global step 1040: 'val_loss' reached 884.18250 (best 884.18250), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=15-loss-val_loss=884.18-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 16, global step 1105: 'val_loss' was not in top 1
+Epoch 17, global step 1170: 'val_loss' reached 848.64807 (best 848.64807), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=17-loss-val_loss=848.65-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 18, global step 1235: 'val_loss' reached 837.34125 (best 837.34125), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=18-loss-val_loss=837.34-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 19, global step 1300: 'val_loss' was not in top 1
+Epoch 20, global step 1365: 'val_loss' reached 798.79883 (best 798.79883), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=20-loss-val_loss=798.80-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 21, global step 1430: 'val_loss' was not in top 1
+Epoch 22, global step 1495: 'val_loss' reached 763.63806 (best 763.63806), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=22-loss-val_loss=763.64-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 23, global step 1560: 'val_loss' was not in top 1
+Epoch 24, global step 1625: 'val_loss' reached 762.21454 (best 762.21454), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=24-loss-val_loss=762.21-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 25, global step 1690: 'val_loss' was not in top 1
+Epoch 26, global step 1755: 'val_loss' was not in top 1
+Epoch 27, global step 1820: 'val_loss' reached 725.42798 (best 725.42798), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=27-loss-val_loss=725.43-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 28, global step 1885: 'val_loss' was not in top 1
+Epoch 29, global step 1950: 'val_loss' was not in top 1
+Epoch 30, global step 2015: 'val_loss' reached 690.98370 (best 690.98370), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=30-loss-val_loss=690.98-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 31, global step 2080: 'val_loss' was not in top 1
+Epoch 32, global step 2145: 'val_loss' was not in top 1
+Epoch 33, global step 2210: 'val_loss' reached 681.48505 (best 681.48505), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=33-loss-val_loss=681.49-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 34, global step 2275: 'val_loss' was not in top 1
+Epoch 35, global step 2340: 'val_loss' reached 668.77313 (best 668.77313), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=35-loss-val_loss=668.77-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 36, global step 2405: 'val_loss' was not in top 1
+Epoch 37, global step 2470: 'val_loss' was not in top 1
+Epoch 38, global step 2535: 'val_loss' reached 662.13757 (best 662.13757), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=38-loss-val_loss=662.14-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 39, global step 2600: 'val_loss' was not in top 1
+Epoch 40, global step 2665: 'val_loss' was not in top 1
+Epoch 41, global step 2730: 'val_loss' reached 631.41284 (best 631.41284), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=41-loss-val_loss=631.41-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 42, global step 2795: 'val_loss' reached 622.71771 (best 622.71771), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=42-loss-val_loss=622.72-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 43, global step 2860: 'val_loss' was not in top 1
+Epoch 44, global step 2925: 'val_loss' reached 608.11810 (best 608.11810), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=44-loss-val_loss=608.12-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 45, global step 2990: 'val_loss' was not in top 1
+Epoch 46, global step 3055: 'val_loss' was not in top 1
+Epoch 47, global step 3120: 'val_loss' was not in top 1
+Epoch 48, global step 3185: 'val_loss' reached 593.41669 (best 593.41669), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=48-loss-val_loss=593.42-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 49, global step 3250: 'val_loss' was not in top 1
+Epoch 50, global step 3315: 'val_loss' reached 587.90845 (best 587.90845), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=50-loss-val_loss=587.91-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 51, global step 3380: 'val_loss' was not in top 1
+Epoch 52, global step 3445: 'val_loss' was not in top 1
+Epoch 53, global step 3510: 'val_loss' was not in top 1
+Epoch 54, global step 3575: 'val_loss' was not in top 1
+Epoch 55, global step 3640: 'val_loss' reached 557.24738 (best 557.24738), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=55-loss-val_loss=557.25-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 56, global step 3705: 'val_loss' was not in top 1
+Epoch 57, global step 3770: 'val_loss' was not in top 1
+Epoch 58, global step 3835: 'val_loss' was not in top 1
+Epoch 59, global step 3900: 'val_loss' was not in top 1
+Epoch 60, global step 3965: 'val_loss' was not in top 1
+Epoch 61, global step 4030: 'val_loss' reached 544.64355 (best 544.64355), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=61-loss-val_loss=544.64-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 62, global step 4095: 'val_loss' reached 532.64801 (best 532.64801), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=62-loss-val_loss=532.65-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 63, global step 4160: 'val_loss' was not in top 1
+Epoch 64, global step 4225: 'val_loss' was not in top 1
+Epoch 65, global step 4290: 'val_loss' was not in top 1
+Epoch 66, global step 4355: 'val_loss' reached 528.96655 (best 528.96655), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=66-loss-val_loss=528.97-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 67, global step 4420: 'val_loss' was not in top 1
+Epoch 68, global step 4485: 'val_loss' was not in top 1
+Epoch 69, global step 4550: 'val_loss' was not in top 1
+Epoch 70, global step 4615: 'val_loss' reached 513.90454 (best 513.90454), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=70-loss-val_loss=513.90-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 71, global step 4680: 'val_loss' was not in top 1
+Epoch 72, global step 4745: 'val_loss' was not in top 1
+Epoch 73, global step 4810: 'val_loss' was not in top 1
+Epoch 74, global step 4875: 'val_loss' was not in top 1
+Epoch 75, global step 4940: 'val_loss' was not in top 1
+Epoch 76, global step 5005: 'val_loss' was not in top 1
+Epoch 77, global step 5070: 'val_loss' was not in top 1
+Epoch 78, global step 5135: 'val_loss' was not in top 1
+Epoch 79, global step 5200: 'val_loss' was not in top 1
+Epoch 80, global step 5265: 'val_loss' was not in top 1
+Epoch 81, global step 5330: 'val_loss' reached 506.60300 (best 506.60300), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=81-loss-val_loss=506.60-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 82, global step 5395: 'val_loss' was not in top 1
+Epoch 83, global step 5460: 'val_loss' was not in top 1
+Epoch 84, global step 5525: 'val_loss' was not in top 1
+Epoch 85, global step 5590: 'val_loss' was not in top 1
+Epoch 86, global step 5655: 'val_loss' reached 495.91406 (best 495.91406), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=86-loss-val_loss=495.91-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 87, global step 5720: 'val_loss' was not in top 1
+Epoch 88, global step 5785: 'val_loss' was not in top 1
+Epoch 89, global step 5850: 'val_loss' was not in top 1
+Epoch 90, global step 5915: 'val_loss' was not in top 1
+Epoch 91, global step 5980: 'val_loss' was not in top 1
+Epoch 92, global step 6045: 'val_loss' was not in top 1
+Epoch 93, global step 6110: 'val_loss' was not in top 1
+Epoch 94, global step 6175: 'val_loss' reached 476.21677 (best 476.21677), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=94-loss-val_loss=476.22-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 95, global step 6240: 'val_loss' was not in top 1
+Epoch 96, global step 6305: 'val_loss' was not in top 1
+Epoch 97, global step 6370: 'val_loss' was not in top 1
+Epoch 98, global step 6435: 'val_loss' was not in top 1
+Epoch 99, global step 6500: 'val_loss' was not in top 1
+Epoch 100, global step 6565: 'val_loss' was not in top 1
+Epoch 101, global step 6630: 'val_loss' was not in top 1
+Epoch 102, global step 6695: 'val_loss' was not in top 1
+Epoch 103, global step 6760: 'val_loss' was not in top 1
+Epoch 104, global step 6825: 'val_loss' was not in top 1
+Epoch 105, global step 6890: 'val_loss' was not in top 1
+Epoch 106, global step 6955: 'val_loss' reached 475.33609 (best 475.33609), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=106-loss-val_loss=475.34-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 107, global step 7020: 'val_loss' was not in top 1
+Epoch 108, global step 7085: 'val_loss' was not in top 1
+Epoch 109, global step 7150: 'val_loss' was not in top 1
+Epoch 110, global step 7215: 'val_loss' reached 466.77460 (best 466.77460), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=110-loss-val_loss=466.77-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 111, global step 7280: 'val_loss' was not in top 1
+Epoch 112, global step 7345: 'val_loss' was not in top 1
+Epoch 113, global step 7410: 'val_loss' was not in top 1
+Epoch 114, global step 7475: 'val_loss' was not in top 1
+Epoch 115, global step 7540: 'val_loss' was not in top 1
+Epoch 116, global step 7605: 'val_loss' was not in top 1
+Epoch 117, global step 7670: 'val_loss' was not in top 1
+Epoch 118, global step 7735: 'val_loss' was not in top 1
+Epoch 119, global step 7800: 'val_loss' was not in top 1
+Epoch 120, global step 7865: 'val_loss' was not in top 1
+Epoch 121, global step 7930: 'val_loss' was not in top 1
+Epoch 122, global step 7995: 'val_loss' was not in top 1
+Epoch 123, global step 8060: 'val_loss' was not in top 1
+Epoch 124, global step 8125: 'val_loss' was not in top 1
+Epoch 125, global step 8190: 'val_loss' was not in top 1
+Epoch 126, global step 8255: 'val_loss' was not in top 1
+Epoch 127, global step 8320: 'val_loss' was not in top 1
+Epoch 128, global step 8385: 'val_loss' reached 458.62500 (best 458.62500), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=128-loss-val_loss=458.62-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 129, global step 8450: 'val_loss' was not in top 1
+Epoch 130, global step 8515: 'val_loss' was not in top 1
+Epoch 131, global step 8580: 'val_loss' was not in top 1
+Epoch 132, global step 8645: 'val_loss' was not in top 1
+Epoch 133, global step 8710: 'val_loss' was not in top 1
+Epoch 134, global step 8775: 'val_loss' was not in top 1
+Epoch 135, global step 8840: 'val_loss' was not in top 1
+Epoch 136, global step 8905: 'val_loss' was not in top 1
+Epoch 137, global step 8970: 'val_loss' was not in top 1
+Epoch 138, global step 9035: 'val_loss' was not in top 1
+Epoch 139, global step 9100: 'val_loss' was not in top 1
+Epoch 140, global step 9165: 'val_loss' was not in top 1
+Epoch 141, global step 9230: 'val_loss' was not in top 1
+Epoch 142, global step 9295: 'val_loss' was not in top 1
+Epoch 143, global step 9360: 'val_loss' was not in top 1
+Epoch 144, global step 9425: 'val_loss' was not in top 1
+Epoch 145, global step 9490: 'val_loss' was not in top 1
+Epoch 146, global step 9555: 'val_loss' was not in top 1
+Epoch 147, global step 9620: 'val_loss' was not in top 1
+Epoch 148, global step 9685: 'val_loss' was not in top 1
+Epoch 149, global step 9750: 'val_loss' was not in top 1
+Epoch 150, global step 9815: 'val_loss' was not in top 1
+Epoch 151, global step 9880: 'val_loss' was not in top 1
+Epoch 152, global step 9945: 'val_loss' was not in top 1
+Epoch 153, global step 10010: 'val_loss' was not in top 1
+Epoch 154, global step 10075: 'val_loss' was not in top 1
+Epoch 155, global step 10140: 'val_loss' reached 447.41217 (best 447.41217), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=155-loss-val_loss=447.41-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 156, global step 10205: 'val_loss' was not in top 1
+Epoch 157, global step 10270: 'val_loss' was not in top 1
+Epoch 158, global step 10335: 'val_loss' was not in top 1
+Epoch 159, global step 10400: 'val_loss' was not in top 1
+Epoch 160, global step 10465: 'val_loss' was not in top 1
+Epoch 161, global step 10530: 'val_loss' was not in top 1
+Epoch 162, global step 10595: 'val_loss' was not in top 1
+Epoch 163, global step 10660: 'val_loss' was not in top 1
+Epoch 164, global step 10725: 'val_loss' was not in top 1
+Epoch 165, global step 10790: 'val_loss' was not in top 1
+Epoch 166, global step 10855: 'val_loss' was not in top 1
+Epoch 167, global step 10920: 'val_loss' was not in top 1
+Epoch 168, global step 10985: 'val_loss' was not in top 1
+Epoch 169, global step 11050: 'val_loss' was not in top 1
+Epoch 170, global step 11115: 'val_loss' was not in top 1
+Epoch 171, global step 11180: 'val_loss' was not in top 1
+Epoch 172, global step 11245: 'val_loss' was not in top 1
+Epoch 173, global step 11310: 'val_loss' was not in top 1
+Epoch 174, global step 11375: 'val_loss' was not in top 1
+Epoch 175, global step 11440: 'val_loss' was not in top 1
+Epoch 176, global step 11505: 'val_loss' was not in top 1
+Epoch 177, global step 11570: 'val_loss' was not in top 1
+Epoch 178, global step 11635: 'val_loss' was not in top 1
+Epoch 179, global step 11700: 'val_loss' was not in top 1
+Epoch 180, global step 11765: 'val_loss' was not in top 1
+Epoch 181, global step 11830: 'val_loss' was not in top 1
+Epoch 182, global step 11895: 'val_loss' was not in top 1
+Epoch 183, global step 11960: 'val_loss' was not in top 1
+Epoch 184, global step 12025: 'val_loss' was not in top 1
+Epoch 185, global step 12090: 'val_loss' was not in top 1
+Epoch 186, global step 12155: 'val_loss' was not in top 1
+Epoch 187, global step 12220: 'val_loss' was not in top 1
+Epoch 188, global step 12285: 'val_loss' reached 437.57214 (best 437.57214), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=188-loss-val_loss=437.57-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 189, global step 12350: 'val_loss' was not in top 1
+Epoch 190, global step 12415: 'val_loss' was not in top 1
+Epoch 191, global step 12480: 'val_loss' was not in top 1
+Epoch 192, global step 12545: 'val_loss' was not in top 1
+Epoch 193, global step 12610: 'val_loss' was not in top 1
+Epoch 194, global step 12675: 'val_loss' was not in top 1
+Epoch 195, global step 12740: 'val_loss' was not in top 1
+Epoch 196, global step 12805: 'val_loss' was not in top 1
+Epoch 197, global step 12870: 'val_loss' was not in top 1
+Epoch 198, global step 12935: 'val_loss' was not in top 1
+Epoch 199, global step 13000: 'val_loss' was not in top 1
+Epoch 200, global step 13065: 'val_loss' was not in top 1
+Epoch 201, global step 13130: 'val_loss' was not in top 1
+Epoch 202, global step 13195: 'val_loss' was not in top 1
+Epoch 203, global step 13260: 'val_loss' was not in top 1
+Epoch 204, global step 13325: 'val_loss' was not in top 1
+Epoch 205, global step 13390: 'val_loss' was not in top 1
+Epoch 206, global step 13455: 'val_loss' was not in top 1
+Epoch 207, global step 13520: 'val_loss' was not in top 1
+Epoch 208, global step 13585: 'val_loss' was not in top 1
+Epoch 209, global step 13650: 'val_loss' was not in top 1
+Epoch 210, global step 13715: 'val_loss' was not in top 1
+Epoch 211, global step 13780: 'val_loss' was not in top 1
+Epoch 212, global step 13845: 'val_loss' reached 431.54495 (best 431.54495), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=212-loss-val_loss=431.54-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 213, global step 13910: 'val_loss' was not in top 1
+Epoch 214, global step 13975: 'val_loss' was not in top 1
+Epoch 215, global step 14040: 'val_loss' was not in top 1
+Epoch 216, global step 14105: 'val_loss' was not in top 1
+Epoch 217, global step 14170: 'val_loss' was not in top 1
+Epoch 218, global step 14235: 'val_loss' was not in top 1
+Epoch 219, global step 14300: 'val_loss' was not in top 1
+Epoch 220, global step 14365: 'val_loss' was not in top 1
+Epoch 221, global step 14430: 'val_loss' was not in top 1
+Epoch 222, global step 14495: 'val_loss' was not in top 1
+Epoch 223, global step 14560: 'val_loss' was not in top 1
+Epoch 224, global step 14625: 'val_loss' was not in top 1
+Epoch 225, global step 14690: 'val_loss' was not in top 1
+Epoch 226, global step 14755: 'val_loss' was not in top 1
+Epoch 227, global step 14820: 'val_loss' was not in top 1
+Epoch 228, global step 14885: 'val_loss' was not in top 1
+Epoch 229, global step 14950: 'val_loss' was not in top 1
+Epoch 230, global step 15015: 'val_loss' was not in top 1
+Epoch 231, global step 15080: 'val_loss' was not in top 1
+Epoch 232, global step 15145: 'val_loss' was not in top 1
+Epoch 233, global step 15210: 'val_loss' was not in top 1
+Epoch 234, global step 15275: 'val_loss' was not in top 1
+Epoch 235, global step 15340: 'val_loss' was not in top 1
+Epoch 236, global step 15405: 'val_loss' was not in top 1
+Epoch 237, global step 15470: 'val_loss' was not in top 1
+Epoch 238, global step 15535: 'val_loss' was not in top 1
+Epoch 239, global step 15600: 'val_loss' was not in top 1
+Epoch 240, global step 15665: 'val_loss' was not in top 1
+Epoch 241, global step 15730: 'val_loss' was not in top 1
+Epoch 242, global step 15795: 'val_loss' was not in top 1
+Epoch 243, global step 15860: 'val_loss' was not in top 1
+Epoch 244, global step 15925: 'val_loss' was not in top 1
+Epoch 245, global step 15990: 'val_loss' was not in top 1
+Epoch 246, global step 16055: 'val_loss' was not in top 1
+Epoch 247, global step 16120: 'val_loss' was not in top 1
+Epoch 248, global step 16185: 'val_loss' was not in top 1
+Epoch 249, global step 16250: 'val_loss' was not in top 1
+Epoch 250, global step 16315: 'val_loss' was not in top 1
+Epoch 251, global step 16380: 'val_loss' was not in top 1
+Epoch 252, global step 16445: 'val_loss' was not in top 1
+Epoch 253, global step 16510: 'val_loss' was not in top 1
+Epoch 254, global step 16575: 'val_loss' was not in top 1
+Epoch 255, global step 16640: 'val_loss' was not in top 1
+Epoch 256, global step 16705: 'val_loss' was not in top 1
+Epoch 257, global step 16770: 'val_loss' was not in top 1
+Epoch 258, global step 16835: 'val_loss' was not in top 1
+Epoch 259, global step 16900: 'val_loss' was not in top 1
+Epoch 260, global step 16965: 'val_loss' was not in top 1
+Epoch 261, global step 17030: 'val_loss' was not in top 1
+Epoch 262, global step 17095: 'val_loss' was not in top 1
+Epoch 263, global step 17160: 'val_loss' was not in top 1
+Epoch 264, global step 17225: 'val_loss' was not in top 1
+Epoch 265, global step 17290: 'val_loss' was not in top 1
+Epoch 266, global step 17355: 'val_loss' was not in top 1
+Epoch 267, global step 17420: 'val_loss' was not in top 1
+Epoch 268, global step 17485: 'val_loss' was not in top 1
+Epoch 269, global step 17550: 'val_loss' was not in top 1
+Epoch 270, global step 17615: 'val_loss' was not in top 1
+Epoch 271, global step 17680: 'val_loss' was not in top 1
+Epoch 272, global step 17745: 'val_loss' was not in top 1
+Epoch 273, global step 17810: 'val_loss' was not in top 1
+Epoch 274, global step 17875: 'val_loss' was not in top 1
+Epoch 275, global step 17940: 'val_loss' was not in top 1
+Epoch 276, global step 18005: 'val_loss' was not in top 1
+Epoch 277, global step 18070: 'val_loss' was not in top 1
+Epoch 278, global step 18135: 'val_loss' was not in top 1
+Epoch 279, global step 18200: 'val_loss' was not in top 1
+Epoch 280, global step 18265: 'val_loss' was not in top 1
+Epoch 281, global step 18330: 'val_loss' was not in top 1
+Epoch 282, global step 18395: 'val_loss' was not in top 1
+Epoch 283, global step 18460: 'val_loss' was not in top 1
+Epoch 284, global step 18525: 'val_loss' was not in top 1
+Epoch 285, global step 18590: 'val_loss' was not in top 1
+Epoch 286, global step 18655: 'val_loss' was not in top 1
+Epoch 287, global step 18720: 'val_loss' was not in top 1
+Epoch 288, global step 18785: 'val_loss' was not in top 1
+Epoch 289, global step 18850: 'val_loss' was not in top 1
+Epoch 290, global step 18915: 'val_loss' was not in top 1
+Epoch 291, global step 18980: 'val_loss' was not in top 1
+Epoch 292, global step 19045: 'val_loss' was not in top 1
+Epoch 293, global step 19110: 'val_loss' was not in top 1
+Epoch 294, global step 19175: 'val_loss' was not in top 1
+Epoch 295, global step 19240: 'val_loss' was not in top 1
+Epoch 296, global step 19305: 'val_loss' was not in top 1
+Epoch 297, global step 19370: 'val_loss' was not in top 1
+Epoch 298, global step 19435: 'val_loss' was not in top 1
+Epoch 299, global step 19500: 'val_loss' was not in top 1
+Epoch 300, global step 19565: 'val_loss' was not in top 1
+Epoch 301, global step 19630: 'val_loss' was not in top 1
+Epoch 302, global step 19695: 'val_loss' was not in top 1
+Epoch 303, global step 19760: 'val_loss' was not in top 1
+Epoch 304, global step 19825: 'val_loss' was not in top 1
+Epoch 305, global step 19890: 'val_loss' reached 420.87057 (best 420.87057), saving model to '/home/ubuntu/wanasekara.sh/TMC_SemCom/checkpoints/checkpoint_epoch-epoch=305-loss-val_loss=420.87-batch-args.batch_size=0-proj-args.out_dim=0-tot_epo-args.epochs=0.ckpt' as top 1
+Epoch 306, global step 19955: 'val_loss' was not in top 1
+Epoch 307, global step 20020: 'val_loss' was not in top 1
+Epoch 308, global step 20085: 'val_loss' was not in top 1
+Epoch 309, global step 20150: 'val_loss' was not in top 1
+Epoch 310, global step 20215: 'val_loss' was not in top 1
+Epoch 311, global step 20280: 'val_loss' was not in top 1
+Epoch 312, global step 20345: 'val_loss' was not in top 1
+Epoch 313, global step 20410: 'val_loss' was not in top 1
+Epoch 314, global step 20475: 'val_loss' was not in top 1
+Epoch 315, global step 20540: 'val_loss' was not in top 1
+Epoch 316, global step 20605: 'val_loss' was not in top 1
+Epoch 317, global step 20670: 'val_loss' was not in top 1
+Epoch 318, global step 20735: 'val_loss' was not in top 1
+Epoch 319, global step 20800: 'val_loss' was not in top 1
+Epoch 320, global step 20865: 'val_loss' was not in top 1
+Epoch 321, global step 20930: 'val_loss' was not in top 1
+Epoch 322, global step 20995: 'val_loss' was not in top 1
+Epoch 323, global step 21060: 'val_loss' was not in top 1
+Epoch 324, global step 21125: 'val_loss' was not in top 1
+Epoch 325, global step 21190: 'val_loss' was not in top 1
+Epoch 326, global step 21255: 'val_loss' was not in top 1
+Epoch 327, global step 21320: 'val_loss' was not in top 1
+Epoch 328, global step 21385: 'val_loss' was not in top 1
+Epoch 329, global step 21450: 'val_loss' was not in top 1
+Epoch 330, global step 21515: 'val_loss' was not in top 1
+Epoch 331, global step 21580: 'val_loss' was not in top 1
+Epoch 332, global step 21645: 'val_loss' was not in top 1
+Epoch 333, global step 21710: 'val_loss' was not in top 1
+Epoch 334, global step 21775: 'val_loss' was not in top 1
+Epoch 335, global step 21840: 'val_loss' was not in top 1
+Epoch 336, global step 21905: 'val_loss' was not in top 1
+Epoch 337, global step 21970: 'val_loss' was not in top 1
+Epoch 338, global step 22035: 'val_loss' was not in top 1
+Epoch 339, global step 22100: 'val_loss' was not in top 1
+Epoch 340, global step 22165: 'val_loss' was not in top 1
+Epoch 341, global step 22230: 'val_loss' was not in top 1
+Epoch 342, global step 22295: 'val_loss' was not in top 1
+Epoch 343, global step 22360: 'val_loss' was not in top 1
+Epoch 344, global step 22425: 'val_loss' was not in top 1
+Epoch 345, global step 22490: 'val_loss' was not in top 1
+Epoch 346, global step 22555: 'val_loss' was not in top 1
+Epoch 347, global step 22620: 'val_loss' was not in top 1
+Epoch 348, global step 22685: 'val_loss' was not in top 1
+Epoch 349, global step 22750: 'val_loss' was not in top 1
+Epoch 350, global step 22815: 'val_loss' was not in top 1
+Epoch 351, global step 22880: 'val_loss' was not in top 1
+Epoch 352, global step 22945: 'val_loss' was not in top 1
+Epoch 353, global step 23010: 'val_loss' was not in top 1
+Epoch 354, global step 23075: 'val_loss' was not in top 1
+Epoch 355, global step 23140: 'val_loss' was not in top 1
+Epoch 356, global step 23205: 'val_loss' was not in top 1
+Epoch 357, global step 23270: 'val_loss' was not in top 1
+Epoch 358, global step 23335: 'val_loss' was not in top 1
+Epoch 359, global step 23400: 'val_loss' was not in top 1
+Epoch 360, global step 23465: 'val_loss' was not in top 1
+Epoch 361, global step 23530: 'val_loss' was not in top 1
+Epoch 362, global step 23595: 'val_loss' was not in top 1
+Epoch 363, global step 23660: 'val_loss' was not in top 1
+Epoch 364, global step 23725: 'val_loss' was not in top 1
+Epoch 365, global step 23790: 'val_loss' was not in top 1
+Epoch 366, global step 23855: 'val_loss' was not in top 1
+Epoch 367, global step 23920: 'val_loss' was not in top 1
+Epoch 368, global step 23985: 'val_loss' was not in top 1
+Epoch 369, global step 24050: 'val_loss' was not in top 1
+Epoch 370, global step 24115: 'val_loss' was not in top 1
+Epoch 371, global step 24180: 'val_loss' was not in top 1
+Epoch 372, global step 24245: 'val_loss' was not in top 1
+Epoch 373, global step 24310: 'val_loss' was not in top 1
+Epoch 374, global step 24375: 'val_loss' was not in top 1
+Epoch 375, global step 24440: 'val_loss' was not in top 1
+Epoch 376, global step 24505: 'val_loss' was not in top 1
+Epoch 377, global step 24570: 'val_loss' was not in top 1
+Epoch 378, global step 24635: 'val_loss' was not in top 1
+Epoch 379, global step 24700: 'val_loss' was not in top 1
+Epoch 380, global step 24765: 'val_loss' was not in top 1
+Epoch 381, global step 24830: 'val_loss' was not in top 1
+Epoch 382, global step 24895: 'val_loss' was not in top 1
+Epoch 383, global step 24960: 'val_loss' was not in top 1
+Epoch 384, global step 25025: 'val_loss' was not in top 1
+Epoch 385, global step 25090: 'val_loss' was not in top 1
+Epoch 386, global step 25155: 'val_loss' was not in top 1
+Epoch 387, global step 25220: 'val_loss' was not in top 1
+Epoch 388, global step 25285: 'val_loss' was not in top 1
+Epoch 389, global step 25350: 'val_loss' was not in top 1
+Epoch 390, global step 25415: 'val_loss' was not in top 1
+Epoch 391, global step 25480: 'val_loss' was not in top 1
+Epoch 392, global step 25545: 'val_loss' was not in top 1
+Epoch 393, global step 25610: 'val_loss' was not in top 1
+Epoch 394, global step 25675: 'val_loss' was not in top 1
+Epoch 395, global step 25740: 'val_loss' was not in top 1
+Epoch 396, global step 25805: 'val_loss' was not in top 1
+Epoch 397, global step 25870: 'val_loss' was not in top 1
+Epoch 398, global step 25935: 'val_loss' was not in top 1
+Epoch 399, global step 26000: 'val_loss' was not in top 1
+Epoch 400, global step 26065: 'val_loss' was not in top 1
+Epoch 401, global step 26130: 'val_loss' was not in top 1
+Epoch 402, global step 26195: 'val_loss' was not in top 1
+Epoch 403, global step 26260: 'val_loss' was not in top 1
+Epoch 404, global step 26325: 'val_loss' was not in top 1
+Epoch 405, global step 26390: 'val_loss' was not in top 1
+Epoch 406, global step 26455: 'val_loss' was not in top 1
+Epoch 407, global step 26520: 'val_loss' was not in top 1
+Epoch 408, global step 26585: 'val_loss' was not in top 1
+Epoch 409, global step 26650: 'val_loss' was not in top 1
+Epoch 410, global step 26715: 'val_loss' was not in top 1
+Epoch 411, global step 26780: 'val_loss' was not in top 1
+Epoch 412, global step 26845: 'val_loss' was not in top 1
+Epoch 413, global step 26910: 'val_loss' was not in top 1
+Epoch 414, global step 26975: 'val_loss' was not in top 1
+Epoch 415, global step 27040: 'val_loss' was not in top 1
+Epoch 416, global step 27105: 'val_loss' was not in top 1
+Epoch 417, global step 27170: 'val_loss' was not in top 1
+Epoch 418, global step 27235: 'val_loss' was not in top 1
+Epoch 419, global step 27300: 'val_loss' was not in top 1
+Epoch 420, global step 27365: 'val_loss' was not in top 1
+Epoch 421, global step 27430: 'val_loss' was not in top 1
+Epoch 422, global step 27495: 'val_loss' was not in top 1
+Epoch 423, global step 27560: 'val_loss' was not in top 1
+Epoch 424, global step 27625: 'val_loss' was not in top 1
+Epoch 425, global step 27690: 'val_loss' was not in top 1
+Epoch 426, global step 27755: 'val_loss' was not in top 1
+Epoch 427, global step 27820: 'val_loss' was not in top 1
+Epoch 428, global step 27885: 'val_loss' was not in top 1
+Epoch 429, global step 27950: 'val_loss' was not in top 1
+Epoch 430, global step 28015: 'val_loss' was not in top 1
+Epoch 431, global step 28080: 'val_loss' was not in top 1
+Epoch 432, global step 28145: 'val_loss' was not in top 1
+Epoch 433, global step 28210: 'val_loss' was not in top 1
+Epoch 434, global step 28275: 'val_loss' was not in top 1
+Epoch 435, global step 28340: 'val_loss' was not in top 1
+Epoch 436, global step 28405: 'val_loss' was not in top 1
+Epoch 437, global step 28470: 'val_loss' was not in top 1
+Epoch 438, global step 28535: 'val_loss' was not in top 1
+Epoch 439, global step 28600: 'val_loss' was not in top 1
+Epoch 440, global step 28665: 'val_loss' was not in top 1
+Epoch 441, global step 28730: 'val_loss' was not in top 1
+Epoch 442, global step 28795: 'val_loss' was not in top 1
+Epoch 443, global step 28860: 'val_loss' was not in top 1
+Epoch 444, global step 28925: 'val_loss' was not in top 1
+Epoch 445, global step 28990: 'val_loss' was not in top 1
+Epoch 446, global step 29055: 'val_loss' was not in top 1
+Epoch 447, global step 29120: 'val_loss' was not in top 1
+Epoch 448, global step 29185: 'val_loss' was not in top 1
+Epoch 449, global step 29250: 'val_loss' was not in top 1
+Epoch 450, global step 29315: 'val_loss' was not in top 1
+Epoch 451, global step 29380: 'val_loss' was not in top 1
+Epoch 452, global step 29445: 'val_loss' was not in top 1
+Epoch 453, global step 29510: 'val_loss' was not in top 1
+Epoch 454, global step 29575: 'val_loss' was not in top 1
+Epoch 455, global step 29640: 'val_loss' was not in top 1
+Epoch 456, global step 29705: 'val_loss' was not in top 1
+Epoch 457, global step 29770: 'val_loss' was not in top 1
+Epoch 458, global step 29835: 'val_loss' was not in top 1
+Epoch 459, global step 29900: 'val_loss' was not in top 1
+Epoch 460, global step 29965: 'val_loss' was not in top 1
+Epoch 461, global step 30030: 'val_loss' was not in top 1
+Epoch 462, global step 30095: 'val_loss' was not in top 1
+Epoch 463, global step 30160: 'val_loss' was not in top 1
+Epoch 464, global step 30225: 'val_loss' was not in top 1
+Epoch 465, global step 30290: 'val_loss' was not in top 1
+Epoch 466, global step 30355: 'val_loss' was not in top 1
+Epoch 467, global step 30420: 'val_loss' was not in top 1
+Epoch 468, global step 30485: 'val_loss' was not in top 1
+Epoch 469, global step 30550: 'val_loss' was not in top 1
+Epoch 470, global step 30615: 'val_loss' was not in top 1
+Epoch 471, global step 30680: 'val_loss' was not in top 1
+Epoch 472, global step 30745: 'val_loss' was not in top 1
+Epoch 473, global step 30810: 'val_loss' was not in top 1
+Epoch 474, global step 30875: 'val_loss' was not in top 1
+Epoch 475, global step 30940: 'val_loss' was not in top 1
+Epoch 476, global step 31005: 'val_loss' was not in top 1
+Epoch 477, global step 31070: 'val_loss' was not in top 1
+Epoch 478, global step 31135: 'val_loss' was not in top 1
+Epoch 479, global step 31200: 'val_loss' was not in top 1
+Epoch 480, global step 31265: 'val_loss' was not in top 1
+Epoch 481, global step 31330: 'val_loss' was not in top 1
+Epoch 482, global step 31395: 'val_loss' was not in top 1
+Epoch 483, global step 31460: 'val_loss' was not in top 1
+Epoch 484, global step 31525: 'val_loss' was not in top 1
+Epoch 485, global step 31590: 'val_loss' was not in top 1
+Epoch 486, global step 31655: 'val_loss' was not in top 1
+Epoch 487, global step 31720: 'val_loss' was not in top 1
+Epoch 488, global step 31785: 'val_loss' was not in top 1
+Epoch 489, global step 31850: 'val_loss' was not in top 1
+Epoch 490, global step 31915: 'val_loss' was not in top 1
+Epoch 491, global step 31980: 'val_loss' was not in top 1
+Epoch 492, global step 32045: 'val_loss' was not in top 1
+Epoch 493, global step 32110: 'val_loss' was not in top 1
+Epoch 494, global step 32175: 'val_loss' was not in top 1
+Epoch 495, global step 32240: 'val_loss' was not in top 1
+Epoch 496, global step 32305: 'val_loss' was not in top 1
+Epoch 497, global step 32370: 'val_loss' was not in top 1
+Epoch 498, global step 32435: 'val_loss' was not in top 1
+Epoch 499, global step 32500: 'val_loss' was not in top 1
+`Trainer.fit` stopped: `max_epochs=500` reached.
+==================Saving Model==================
+Model saved as cifar10_resnet50_outDim-2048_Epo500_barlowtwins.pth

@@ -1,0 +1,10 @@
+Namespace(workers=8, epochs=500, batch_size=128, lr=0.0003, lambd=0.0055, output_dim=4096, dataset='cifar10', encoder='resnet34', num_workers=8)
+Files already downloaded and verified
+Files already downloaded and verified
+/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+===================Training model====================
+Initializing distributed: GLOBAL_RANK: 2, MEMBER: 3/5
+LOCAL_RANK: 2 - CUDA_VISIBLE_DEVICES: [0,1,2,3,4,5]

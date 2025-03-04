@@ -1,0 +1,15 @@
+Namespace(workers=8, epochs=500, batch_size=128, lr=0.0003, lambd=0.0055, output_dim=2048, dataset='cifar10', encoder='resnet50', num_workers=8)
+Files already downloaded and verified
+Files already downloaded and verified
+/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+Traceback (most recent call last):
+  File "/home/ubuntu/wanasekara.sh/TMC_SemCom/train.py", line 182, in <module>
+    main()
+  File "/home/ubuntu/wanasekara.sh/TMC_SemCom/train.py", line 123, in main
+    encoder_out = encoder.fc.in_features
+  File "/home/ubuntu/miniconda3/envs/test/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1614, in __getattr__
+    raise AttributeError("'{}' object has no attribute '{}'".format(
+AttributeError: 'Identity' object has no attribute 'in_features'

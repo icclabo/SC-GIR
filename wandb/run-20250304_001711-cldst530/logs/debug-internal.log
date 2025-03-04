@@ -1,0 +1,18 @@
+{"time":"2025-03-04T00:17:11.428282312Z","level":"INFO","msg":"using version","core version":"0.18.3"}
+{"time":"2025-03-04T00:17:11.428310925Z","level":"INFO","msg":"created symlink","path":"/home/ubuntu/wanasekara.sh/TMC_SemCom/wandb/run-20250304_001711-cldst530/logs/debug-core.log"}
+{"time":"2025-03-04T00:17:11.428533564Z","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2025-03-04T00:17:11.43820578Z","level":"INFO","msg":"created new stream","id":"cldst530"}
+{"time":"2025-03-04T00:17:11.438227383Z","level":"INFO","msg":"stream: started","id":"cldst530"}
+{"time":"2025-03-04T00:17:11.438249051Z","level":"INFO","msg":"handler: started","stream_id":{"value":"cldst530"}}
+{"time":"2025-03-04T00:17:11.438266502Z","level":"INFO","msg":"sender: started","stream_id":{"value":"cldst530"}}
+{"time":"2025-03-04T00:17:11.438252543Z","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"cldst530"}}
+{"time":"2025-03-04T00:17:11.775353228Z","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2025-03-04T00:17:11.776090623Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-04T02:00:20.829075142Z","level":"INFO","msg":"stream: closing","id":"cldst530"}
+{"time":"2025-03-04T02:00:20.829114401Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-04T02:00:20.832128124Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-04T02:00:22.281296137Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-04T02:00:22.606614043Z","level":"INFO","msg":"handler: closed","stream_id":{"value":"cldst530"}}
+{"time":"2025-03-04T02:00:22.606667316Z","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"cldst530"}}
+{"time":"2025-03-04T02:00:22.606683626Z","level":"INFO","msg":"sender: closed","stream_id":{"value":"cldst530"}}
+{"time":"2025-03-04T02:00:22.606762246Z","level":"INFO","msg":"stream: closed","id":"cldst530"}

@@ -18,7 +18,7 @@ from torchvision.datasets import CIFAR10, MNIST
 from torchvision.models.resnet import resnet18
 from torchvision.utils import make_grid
 import argparse
-from torchvision.models.resnet import resnet34, resnet18
+from torchvision.models.resnet import resnet34, resnet18, resnet50
 
 from transformation import BarlowTwinsTransform, cifar10_normalization, mnist_normalization
 from model import BarlowTwins
@@ -37,11 +37,11 @@ parser.add_argument('--workers', default=8, type=int, metavar='N',
                     help='number of data loader workers')
 parser.add_argument('--epochs', default=250, type=int, metavar='N',
                     help='number of total epochs to run')
-parser.add_argument('--batch-size', default=128, type=int, metavar='N',
+parser.add_argument('--batch_size', default=128, type=int, metavar='N',
                     help='mini-batch size')
 parser.add_argument('--lr', default=3e-4, type=float, metavar='LR',
                     help='initial learning rate')
-parser.add_argument('--lambd', default=0.0051, type=float, metavar='L',
+parser.add_argument('--lambd', default=0.0055, type=float, metavar='L',
                     help='weight on off-diagonal terms')
 parser.add_argument('--output_dim', default=2048, type=int,
                     metavar='MLP', help='projector MLP')
@@ -109,6 +109,19 @@ def main():
         
         encoder.fc = nn.Identity()
         encoder_out = encoder.fc.in_features
+    
+    elif args.encoder == 'resnet50':
+        encoder = resnet18(pretrained=False)
+        if args.dataset == 'cifar10':
+            encoder.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1, bias=False)
+            encoder.maxpool = nn.MaxPool2d(kernel_size=1, stride=1)
+            
+        elif args.dataset == 'mnist':
+            encoder.conv1 = nn.Conv2d(1, 64, kernel_size=3, stride=1, padding=1, bias=False)
+        
+        encoder_out = encoder.fc.in_features
+        encoder.fc = nn.Identity()
+        
 
     else:
         raise ValueError('Encoder not found')
@@ -127,10 +140,9 @@ def main():
         warmup_epochs = 10,
         max_epochs = args.epochs,
     )
-
     checkpoint_callback = ModelCheckpoint(
     dirpath="checkpoints",   # Directory to save checkpoints
-    filename="{epoch}-{val_loss:.4f}",  # Naming format
+    filename="checkpoint_epoch-{epoch}-loss-{val_loss:.2f}-batch-{args.batch_size}-proj-{args.out_dim}-tot_epo-{args.epochs}",  # Naming format
     save_top_k=1,  # Keep only the best model
     monitor="val_loss",  # Track validation loss
     mode="min",  # Save the model with the lowest validation loss
@@ -141,7 +153,7 @@ def main():
     trainer = Trainer(
     max_epochs=args.epochs,
     accelerator="auto",
-    devices=[1,2,3,4,5] if torch.cuda.is_available() else None,  # limiting got iPython runs
+    devices=[0,1,2,3,4,5] if torch.cuda.is_available() else None,  # limiting got iPython runs
     callbacks=[#online_finetuner,
         checkpoint_callback],
     logger=wandb_logger,
@@ -162,7 +174,7 @@ def main():
     torch.save(model.state_dict(), save_str)
 
 
-    
+
     print(f'Model saved as {save_str}')
 
 
