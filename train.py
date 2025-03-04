@@ -25,7 +25,7 @@ from model import BarlowTwins
 from loss import BarlowTwinsLoss
 import wandb
 from pytorch_lightning.loggers import WandbLogger
-
+from task import DownstreamTask
 
 wandb.init(project="TMC_SemCom", name="barlow_twins_training")
 # WandB Logger for PyTorch Lightning
@@ -51,7 +51,14 @@ parser.add_argument('--encoder', default='resnet34', type=str,
                     metavar='encoder', help='encoder model')
 parser.add_argument('--num_workers', default=8, type=int,
                     metavar='num_work', help='Number of GPu workers')
-
+parser.add_argument('--downstream', default=False, type=bool,
+                    metavar='downstream_task', help='downstream task')
+parser.add_argument('--compress_dim', default=1024, type=int,
+                    metavar='compress_dim', help='Compression Dimensions')
+parser.add_argument('--SNR', default=15, type=int,
+                    metavar='SNR', help='Signal to Noise Ratio')
+parser.add_argument('--down_epochs', default=100, type=int,
+                    metavar='down_epochs', help='Downstream Task Epochs')
 
 def main():
     args = parser.parse_args()
@@ -149,33 +156,96 @@ def main():
     save_last=True,  # Also save the last model
     verbose=True
 )
-    
-    trainer = Trainer(
-    max_epochs=args.epochs,
-    accelerator="auto",
-    devices=[0,1,2,3,4,5] if torch.cuda.is_available() else None,  # limiting got iPython runs
-    callbacks=[#online_finetuner,
-        checkpoint_callback],
-    logger=wandb_logger,
-)
-    print('===================Training model====================')
+    if args.downstream==False:
 
-    trainer.fit(model, train_loader,val_loader)#val_loader)
-    print('==================Training Finished==================')
+        trainer = Trainer(
+        max_epochs=args.epochs,
+        accelerator="auto",
+        devices=[0,1,2,3,4,5] if torch.cuda.is_available() else None,  # limiting got iPython runs
+        callbacks=[#online_finetuner,
+            checkpoint_callback],
+        logger=wandb_logger,
+    )
+        print('===================Training model====================')
 
-    print('==================Saving Model==================')
-    best_model_path = checkpoint_callback.best_model_path
-    #best_model_path = 'checkpoints/' + 'epoch=230-val_loss=48.2402.ckpt'
-    checkpoint = torch.load(best_model_path, map_location="cpu")
-    model.load_state_dict(checkpoint['state_dict'])
+        trainer.fit(model, train_loader,val_loader)#val_loader)
+        print('==================Training Finished==================')
 
-
-    save_str = f'{args.dataset}_{args.encoder}_outDim-{args.output_dim}_Epo{args.epochs}_barlowtwins.pth'
-    torch.save(model.state_dict(), save_str)
+        print('==================Saving Model==================')
+        best_model_path = checkpoint_callback.best_model_path
+        #best_model_path = 'checkpoints/' + 'epoch=230-val_loss=48.2402.ckpt'
+        checkpoint = torch.load(best_model_path, map_location="cpu")
+        model.load_state_dict(checkpoint['state_dict'])
 
 
+        save_str = f'{args.dataset}_{args.encoder}_outDim-{args.output_dim}_Epo{args.epochs}_barlowtwins.pth'
+        torch.save(model.state_dict(), save_str)
 
-    print(f'Model saved as {save_str}')
+
+
+        print(f'Model saved as {save_str}')
+
+
+
+    else:
+        model.load_state_dict(torch.load('cifar10_resnet50_outDim-2048_Epo500_barlowtwins_valLos-420.pth'))
+        model.eval()
+        
+        downstream_task = DownstreamTask(in_features=encoder_out, 
+                                         hideen_features_channel=1024, 
+                                         hidden_features_classi=1024, 
+                                         num_classes=10, 
+                                         compressed_dimension=args.compress_dim, 
+                                         channel_type='AWGN', 
+                                         SNR=args.SNR)
+
+        downstream_task_optimizer = torch.optim.Adam(downstream_task.parameters(), lr = 1e-3)
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(downstream_task_optimizer, args.down_epochs, eta_min=0, last_epoch=-1)
+        criterion = nn.CrossEntropyLoss()
+
+        running_loss = 0.0
+        running_corrects = 0
+
+        model.to('cuda')
+        model.eval()
+        downstream_task.to('cuda')
+        downstream_task.train()
+
+        for param in model.parameters():  ## freeze the encoder weights
+            param.requires_grad = False
+
+        for epoch in range(args.down_epochs):
+            running_loss = 0.0
+            running_corrects = 0
+            print(f'Epoch {epoch}/{args.down_epochs}')
+            print('-' * 10)
+            for batch in train_loader:
+                (_, _, image), label = batch
+                image = image.to('cuda')
+                label = label.to('cuda') 
+
+                encoder_output = model.forward(image)
+                output = downstream_task(encoder_output)
+                loss = criterion(output, label)
+                downstream_task_optimizer.zero_grad()
+                loss.backward()
+                downstream_task_optimizer.step()
+
+                running_loss += loss.item()
+                _, preds = torch.max(output, 1)
+                running_corrects += torch.sum(preds == label.data)
+            scheduler.step()
+            epoch_loss = running_loss / len(train_loader.dataset)
+            epoch_acc = running_corrects.double() / (len(train_loader.dataset))
+            print(f'Loss: {epoch_loss} Acc: {epoch_acc}')
+                
+
+
+
+
+        
+        
+
 
 
 if __name__ == '__main__':

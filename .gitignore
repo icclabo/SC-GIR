@@ -4,3 +4,6 @@ lightning_logs/
 cifar-10-batches-py/
 *.pth
 wandb/
+wandb/debug-internal.log
+wandb/debug.log
+wandb/latest-run/
