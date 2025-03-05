@@ -53,7 +53,7 @@ parser.add_argument('--num_workers', default=8, type=int,
                     metavar='num_work', help='Number of GPu workers')
 parser.add_argument('--downstream', default=False, type=bool,
                     metavar='downstream_task', help='downstream task')
-parser.add_argument('--compress_dim', default=1024, type=int,
+parser.add_argument('--compress_dim', default=256, type=int,
                     metavar='compress_dim', help='Compression Dimensions')
 parser.add_argument('--SNR', default=10, type=int,
                     metavar='SNR', help='Signal to Noise Ratio')
@@ -188,9 +188,8 @@ def main():
         print(f'Model saved as {save_str}')
 
 
-
     else:
-        model.load_state_dict(torch.load('mnist_resnet50_outDim-2048_Epo500_barlowtwins_valLoss-388.98.pth'))
+        model.load_state_dict(torch.load('cifar10_resnet50_outDim-2048_Epo500_barlowtwins_valLos-420.pth'))
         model.eval()
         
         downstream_task = DownstreamTask(in_features=encoder_out, 
@@ -198,7 +197,7 @@ def main():
                                          hidden_features_classi=1024, 
                                          num_classes=10, 
                                          compressed_dimension=args.compress_dim, 
-                                         channel_type='AWGN', 
+                                         channel_type='Rayleigh', 
                                          SNR=args.SNR)
 
         downstream_task_optimizer = torch.optim.Adam(downstream_task.parameters(), lr = 1e-3)
@@ -276,7 +275,7 @@ def main():
             # Save the best model after all epochs
             if best_state_dict is not None:
                 print('==================Saving Model==================')
-                save_str = f'{args.dataset}_{args.encoder}_outDim-{args.output_dim}_Epo{args.epochs}_downstreamTask.pth'
+                save_str = f'{args.dataset}_{args.encoder}_outDim-{args.output_dim}_Epo{args.epochs}_downstreamTask_Raly.pth'
                 torch.save(best_state_dict, save_str)
                 print(f'Model saved as {save_str} with Best Val Acc: {best_val_acc:.4f}')
             else:
@@ -284,7 +283,7 @@ def main():
         else:
             print('==================Simulating Downstream Task==================') 
 
-            downstream_task.load_state_dict(torch.load('mnist_resnet50_outDim-2048_Epo500_downstreamTask.pth'))
+            downstream_task.load_state_dict(torch.load('cifar10_resnet50_outDim-2048_Epo250_downstreamTask.pth'))
             downstream_task.eval()
             val_running_corrects = 0
             with torch.no_grad():
