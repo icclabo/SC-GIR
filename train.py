@@ -283,7 +283,7 @@ def main():
         else:
             print('==================Simulating Downstream Task==================') 
 
-            downstream_task.load_state_dict(torch.load('cifar10_resnet50_outDim-2048_Epo250_downstreamTask.pth'))
+            downstream_task.load_state_dict(torch.load('cifar10_resnet50_outDim-2048_Epo250_downstreamTask_Raly.pth'))
             downstream_task.eval()
             val_running_corrects = 0
             with torch.no_grad():
