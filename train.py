@@ -41,7 +41,7 @@ parser.add_argument('--batch_size', default=128, type=int, metavar='N',
                     help='mini-batch size')
 parser.add_argument('--lr', default=3e-4, type=float, metavar='LR',
                     help='initial learning rate')
-parser.add_argument('--lambd', default=0.0055, type=float, metavar='L',
+parser.add_argument('--lambd', default=0.0057, type=float, metavar='L',
                     help='weight on off-diagonal terms')
 parser.add_argument('--output_dim', default=2048, type=int,
                     metavar='MLP', help='projector MLP')
@@ -151,7 +151,7 @@ def main():
     )
     checkpoint_callback = ModelCheckpoint(
     dirpath="checkpoints",   # Directory to save checkpoints
-    filename="checkpoint_epoch-{epoch}-loss-{val_loss:.2f}-batch-{args.batch_size}-proj-{args.out_dim}-tot_epo-{args.epochs}",  # Naming format
+    filename="checkpoint_epoch-{epoch}-loss-{val_loss:.2f}-batch-{args.batch_size}-proj-{args.out_dim}-tot_epo-{args.epochs}-data-{args.dataset}",  # Naming format
     save_top_k=1,  # Keep only the best model
     monitor="val_loss",  # Track validation loss
     mode="min",  # Save the model with the lowest validation loss
@@ -190,7 +190,7 @@ def main():
 
 
     else:
-        model.load_state_dict(torch.load('cifar10_resnet50_outDim-2048_Epo500_barlowtwins_valLos-420.pth'))
+        model.load_state_dict(torch.load('mnist_resnet50_outDim-2048_Epo500_barlowtwins_valLoss-388.98.pth'))
         model.eval()
         
         downstream_task = DownstreamTask(in_features=encoder_out, 
@@ -284,7 +284,7 @@ def main():
         else:
             print('==================Simulating Downstream Task==================') 
 
-            downstream_task.load_state_dict(torch.load('cifar10_resnet50_outDim-2048_Epo500_downstreamTask.pth'))
+            downstream_task.load_state_dict(torch.load('mnist_resnet50_outDim-2048_Epo500_downstreamTask.pth'))
             downstream_task.eval()
             val_running_corrects = 0
             with torch.no_grad():

@@ -7,3 +7,4 @@ wandb/*
 wandb/debug-internal.log
 wandb/debug.log
 wandb/latest-run/
+MNIST/
