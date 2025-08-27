@@ -1,5 +1,5 @@
 This source code is associated with the paper 'SC-GIR: Goal-oriented Semantic Communication via Invariant Representation Learning for Image Transmission' published in  IEEE Transactions on Mobile Computing, doi: 10.1109/TMC.2025.3600434
-
+Authors: Senura Hansaja Wanasekara; Van-Dinh Nguyen; Kok-Seng Wong; M.-Duong Nguyen; Symeon Chatzinotas; Octavia A. Dobre
 
 @ARTICLE{11129868,
   author={Wanasekara, Senura Hansaja and Nguyen, Van-Dinh and Wong, Kok-Seng and Nguyen, M.-Duong and Chatzinotas, Symeon and Dobre, Octavia A.},
